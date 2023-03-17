@@ -1,0 +1,93 @@
+.btn-green {
+    background-color: #ffc902 !important;
+    border-color: #ffc902 !important;
+    color: #ffffff !important;
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+.icon-green {
+    color: #ffc902;
+}
+
+.section-green {
+    background-color: #ffc902;
+}
+
+.card {
+	background: #fff;
+    border-radius: 10px;
+}
+
+.card-profile .card-avatar {
+    border-radius: 10px;
+    max-width: 100%;
+    max-height: 100%;
+    margin: 29px;
+}
+
+.card-title, p.product-name{
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.btn-90{
+    width: 90%;
+}
+
+img.logo-head{
+    /*width: 30%;*/
+    max-width: 200px;
+}
+
+.table{
+    text-align: left;
+}
+
+.btn-danger{
+    color: #fff;
+}
+
+.title-green{
+    color: #ffc902;
+    font-weight: 500;
+}
+
+.title-white{
+    color: #fff;
+    font-weight: 500;
+}
+
+.card-profile .card-avatar img {
+    width: 300px !important;
+    height: 300px !important;
+    object-fit: cover;
+}
+.section-gray{
+    padding-top: 5px;
+}
+
+.title-yellow {
+    color: #ffc902;
+    font-weight: 400;
+}
+
+.card-slide {
+    border-radius: 10px !important;
+}
+
+.m10 {
+    margin: 10px !important;
+}
+
+.btn-round {
+    margin: 5px;
+}
+
+/*@media screen and (max-width: 524px) {*/
+    .carousel-inner .carousel-item img {
+        height: 260px !important;
+        width: 70% !important;
+        margin:auto;
+    }
+/*}*/

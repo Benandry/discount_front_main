@@ -1,0 +1,174 @@
+<div class="page-header" data-parallax="true" style="background-color: #ffc902">
+    <div class="filter"></div>
+    <div class="container">
+        <div class="motto text-center">
+            <h1>
+                <img class="logo-head" src="./assets/img/ar2.png">
+            </h1>
+            <!-- <h3>Faites votre commandes en Ligne</h3> -->           
+
+            <div class="row m10">
+                <div class="col-md-6 mr-auto ml-auto">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card page-carousel card-slide">
+                              <ngb-carousel [interval]="3000">
+                                  <ng-template ngbSlide *ngFor="let product of products">
+                                        <div class="picsum-img-wrapper">
+                                            <img [src]="product?.img?.url + product?.img?.name" alt="Random slide">
+                                        </div>
+                                        <div class="carousel-caption">
+                                            <p class="product-name">{{product.name}}</p>
+                                        </div>
+                                    </ng-template>
+                              </ngb-carousel>
+                          </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="row m10">
+                <div class="col-lg-12">
+                    <a (click)="myOrder()" class="btn btn-outline-neutral btn-round">
+                        <i class="fa fa-shopping-cart"></i>
+                        MON PANIER ({{order.length}})
+                    </a>
+                    <a (click)="clearCart()" class="btn btn-danger btn-outline btn-round">
+                        <i class="fa fa-trash"></i>
+                        VIDER MON PANIER 
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="main">
+    <div class="section section-gray text-center" id="store">
+        <div class="container">
+            <h3 class="title title-yellow">PRODUITS DISPONIBLES</h3>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group" style="text-align: left;">
+                        <label>CATÉGORIE</label>
+                        <select class="form-control" [(ngModel)]="categorieFilter" (change)="changeCategorieFilter($event.target.value)">
+                            <option></option>
+                            <option [value]="categorie.key" *ngFor="let categorie of categorieList">
+                                {{ categorie.name }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group" style="text-align: left;">
+                        <label>FAMILLE</label>
+                        <select class="form-control" [(ngModel)]="familyFilter">
+                            <option></option>
+                            <option [value]="family.key" *ngFor="let family of familyList">
+                                {{ family.name }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2" *ngIf="products.length == 2">
+                    
+                </div>
+                <div class="col-md-4" *ngIf="products.length == 1">
+                    
+                </div>
+                <div class="col-md-4" *ngFor="let product of products">
+                    <div *ngIf="product.stock > 0 && (!categorieFilter || categorieFilter == product.categorie) && (!familyFilter || familyFilter == product.family)" class="card card-profile card-plain">
+                        <div class="card-avatar">
+                            <a href="#avatar"><img [src]="product?.img?.url + product?.img?.name" alt="..."></a>
+                        </div>
+                        <div class="card-block">
+                            
+                            <a href="#paper-kit">
+                                <div class="author">
+                                    <h4 class="card-title">
+                                        {{ product.name }}
+                                    </h4>
+                                </div>
+                            </a>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <table class="table">
+                                        <tr>
+                                            <td>STOCK DISPO</td>
+                                            <td>{{ product.stock }} {{ product.unity }} </td>
+                                        </tr>
+                                        <tr>
+                                            <td>PRIX UNITAIRE</td>
+                                            <td>{{ product.price }} kmf</td>
+                                        </tr>
+                                        <tr *ngIf="product.duration">
+                                            <td>DURÉE DE LIVRAISON</td>
+                                            <td>
+                                                {{ product.duration }}
+                                                <span *ngIf="product.duration_type == 1">H</span>
+                                                <span *ngIf="product.duration_type == 2">J</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="form-group">
+                                                    <label>Quantité</label>
+                                                    <input [(ngModel)]="product.quantity" class="form-control" type="number" name="" (keyup)="getQuantity(product)">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button (click)="addToCart(product)" class="btn btn-green btn-90">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        AJOUTER AU PANIER
+                                    </button>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <button (click)="removeToCart(product)" class="btn btn-danger btn-90">
+                                        <i class="fa fa-trash"></i>
+                                        RETIRER DU PANIER
+                                    </button>
+                                </div>
+                            </div>
+
+
+                            <!-- <p class="card-description text-center">
+                            Teamwork is so important that it is virtually impossible for you to reach the heights of your capabilities or make the money that you want without becoming very good at it.
+                            </p> -->
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"><i class="fa fa-twitter"></i></a>
+                            <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"><i class="fa fa-google-plus"></i></a>
+                            <a href="#pablo" class="btn btn-link btn-just-icon btn-neutral"><i class="fa fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2" *ngIf="products.length == 2">
+                    
+                </div>
+
+                <div class="col-md-4" *ngIf="products.length == 1">
+                    
+                </div>
+              
+            </div>
+        </div>
+    </div>
+</div>
+
+

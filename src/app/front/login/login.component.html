@@ -1,0 +1,54 @@
+<div class="wrapper">
+    <div class="page-header page-header-xs" data-parallax="true" style="background-color: #ffc902">
+        <div class="filter"></div>
+        <div class="">
+            <div class="motto text-center">
+                <h1>
+                    <img class="logo-head" src="./assets/img/ar2.png">
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="section login-content">
+        <div class="container">
+            <h2 class="title title-green title-center">SE CONNECTER</h2>
+            <hr>
+            <div class="row" *ngIf="errorMessage">
+              <div class="col-lg-12">
+                <ngb-alert type="danger"  [dismissible]="false">
+                    <div class="container container-no-shadow">
+                        {{ errorMessage }}
+                        <button type="button" name="button" class="close" (click)="closeAlert()">
+                            <i class="nc-icon nc-simple-remove"></i>
+                        </button>
+                    </div>
+                </ngb-alert>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="label-control">EMAIL</label>
+                        <input type="email" class="form-control" name="" [(ngModel)]="value.login" >
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label class="label-control">MOT DE PASSE</label>
+                        <input type="password" class="form-control" name="" [(ngModel)]="value.password" >
+                    </div>
+                </div>
+            </div>
+            <!-- <button class="btn btn-dark" (click)="next(2)">
+                <i class="fa fa-angle-left"></i>
+                PREC.
+            </button> -->
+            <button class="btn btn-success " (click)="login()">
+                <i class="fa fa-user-plus"></i>
+                Se Connecter
+            </button>
+        </div>
+    </div>
+
+    
+</div>

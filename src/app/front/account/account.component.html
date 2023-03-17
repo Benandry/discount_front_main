@@ -1,0 +1,209 @@
+<div class="wrapper" *ngIf="user">
+    <div class="page-header page-header-xs" data-parallax="true" style="background-color: #ffc902">
+        <div class="filter"></div>
+        <div class="">
+            <div class="motto text-center">
+                <h1>
+                    <img class="logo-head" src="./assets/img/ar2.png">
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="section profile-content">
+        <div class="container">
+            <div class="owner">
+                <!-- <div class="avatar">
+                    <img src="./assets/img/user.png" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                </div> -->
+                <div class="name">
+                    <h4 class="title">{{user?.name}} - {{user?.email}}</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 ml-auto mr-auto text-center">
+                    <button class="btn btn-outline-default btn-round" (click)="logout()">
+                    	<i class="fa fa-sign-out"></i>
+                    	Se déconnecter
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section order-content">
+    	<div class="container">
+    		<h3 class="title title-green title-center">
+    			MES COMMANDES
+    		</h3>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-responsive-sm table-hover table-outline mb-0">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    <span class="badge badge-warning">En attente</span>
+                                </th>
+                                <td>
+                                    <span class="badge-warning">Commande enregistré, en attente de votre validation</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <span class="badge badge-info">En cours de validation</span>
+                                </th>
+                                <td>
+                                    <span class="badge-info">Commande envoyé, en cours de validation de l'administrateur</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <br>
+            <br>
+
+    		<div class="row">
+    			<div class="col-lg-12">
+    				<table class="table table-responsive-sm table-hover table-outline mb-0">
+    					<thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Ville</th>
+                                <th>Quartier</th>
+                                <th>Région</th>
+                                <th>Tél</th>
+                                <th>Statut</th>
+                                <th>Commandes</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<tr *ngFor="let order of orders">
+                        		<td>{{order.customer.name}}</td>
+                        		<td>{{order.customer.city}}</td>
+                        		<td>{{order.customer.district}}</td>
+                        		<td>{{order.customer.region}}</td>
+                        		<td>{{order.customer.phone}}</td>
+                        		<td>
+                        			<span class="badge badge-info" *ngIf="order.status == 0">
+                                        En cours de validation
+                                    </span>
+                                    <span class="badge badge-warning" *ngIf="order.status == 5">
+                                        En attente
+                                    </span>
+                                    <span *ngIf="order.status == 6">
+                                        Validé et à livrer
+                                    </span>
+                                    <span class="badge badge-primary" *ngIf="order.status == 10">
+                                        En cours de livraison
+                                    </span>
+                                    <span class="badge badge-success" *ngIf="order.status == 1">
+                                        Terminé
+                                    </span>
+                        		</td>
+                        		<td>
+                                    <table class="table table-responsive-sm table-hover table-outline mb-0 table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Matériel</th>
+                                                <th>Qté</th>
+                                                <th>Montant</th>
+                                                <th *ngIf="duration"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item of order.products">
+                                                <td>{{item?.product?.name}}</td>
+                                                <td>{{item.quantity}}</td>
+                                                <td>{{item.quantity * item.price}} kmf</td>
+                                                <td *ngIf="duration">
+                                                    {{ product.duration }}
+                                                    <span *ngIf="product.duration_type == 1">H</span>
+                                                    <span *ngIf="product.duration_type == 2">J</span>
+                                                </td>
+                                            </tr>
+                                            <tr *ngIf="order.livraison">
+                                                <td>Livraison</td>
+                                                <td>{{order?.livraison?.region}}</td>
+                                                <td>{{order?.livraison?.price}} kmf</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th colspan="2">Total</th>
+                                                <th *ngIf="duration"></th>
+                                                <th>{{order.amount + order?.livraison?.price}} kmf</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>      
+                                </td>
+                        		<td>
+                        			<button class="btn btn-info" (click)="orderDetails(order.key)" >
+                        				<i class="fa fa-edit"></i>
+                        			</button>
+                        		</td>
+                        	</tr>
+                        </tbody> 
+    				</table>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <!-- <div class="section contact-content">
+        <div class="container">
+            <h2 class="title title-green title-center">CONTACTS</h2>
+            <div class="row">
+                <div class="col-lg-12">
+	                <nav class="navbar navbar-expand-lg bg-danger">
+	                    <div class="container">
+	                        <a class="navbar-brand" href="#">Icons</a>
+	                        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar-menu-icon" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	                            <span class="navbar-toggler-icon"></span>
+	                            <span class="navbar-toggler-icon"></span>
+	                            <span class="navbar-toggler-icon"></span>
+	                        </button>
+	                        <div class="collapse navbar-collapse justify-content-end" id="navbar-menu-icon">
+	                            <ul class="navbar-nav">
+	                                <li class="nav-item">
+	                                    <a class="nav-link" href="#pk"><i class="nc-icon nc-email-85" aria-hidden="true"></i></a>
+	                                </li>
+	                                <li class="nav-item">
+	                                    <a class="nav-link" href="#pk"><i class="nc-icon nc-single-02" aria-hidden="true"></i></a>
+	                                </li>
+	                                <li class="nav-item ">
+	                                    <div ngbDropdown class="dropdown" placement="bottom-left">
+	                                    <a class="nav-link" id="dropdownBasic1" ngbDropdownToggle><i class="nc-icon nc-settings-gear-65" aria-hidden="true"></i></a>
+	                                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1" class="dropdown-danger dropdown-menu-right">
+	                                            <a class="dropdown-item">Action - 1</a>
+	                                            <a class="dropdown-item">Another Action</a>
+	                                            <a class="dropdown-item">Something else is here</a>
+	                                            <div class="dropdown-divider"></div>
+	                                            <a class="dropdown-item">Separated link</a>
+	                                        </div>
+	                                    </div>
+	                                </li>
+	                            </ul>
+	                        </div>
+	                    </div>
+	                </nav>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    
+</div>
+
+<div class="wrapper" *ngIf="!user">
+    <div class="page-header page-header-xs" data-parallax="true" style="background-image: url('./assets/img/agro.jpg');">
+        <div class="filter"></div>
+    </div>
+    <div class="section login-section">
+        <h2 class="title title-green title-center">
+            SE CONNECTER
+        </h2>
+        <hr>
+    </div>
+</div>

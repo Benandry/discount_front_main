@@ -1,0 +1,399 @@
+<div class="wrapper">
+    <div class="page-header page-header-xs" data-parallax="true" style="background-color: #ffc902">
+        <div class="filter"></div>
+        <div class="">
+            <div class="motto text-center">
+                <h1>
+                    <img class="logo-head" src="./assets/img/ar2.png">
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="section contact-content">
+        <div class="container">
+            <button class="btn" (click)="prec()" >
+                <i class="fa fa-angle-left"></i>
+            </button>
+            <h2 class="title title-green title-center">
+                Commande
+                <span *ngIf="order?.status == '5'">En attente</span>
+                <span *ngIf="order?.status == '0'">En cours de validation</span>
+                <span *ngIf="order?.status == '1'">Terminé</span>
+                <span *ngIf="order?.status == '6'">Validé et à livrer</span>
+                <span *ngIf="order?.status == '10'">En cours de livraison</span>
+            </h2>
+            <hr>
+            <div class="row">
+                <div class="col-lg-12">
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>MATERIEL</th>
+                                <th>QUANTITE</th>
+                                <th>PRIX</th>
+                                <th>MONTANT</th>
+                                <th *ngIf="edit==true">
+                                    Retirer du Panier
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="edit == false">
+                            <tr *ngFor="let item of order?.products">
+                                <td *ngIf="item.quantity > 0">
+                                    {{item?.product?.name}}
+                                </td>  
+                                <td *ngIf="item.quantity > 0">
+                                    {{ item?.quantity }} {{ item?.product?.unity }}(s)
+                                </td> 
+                                <td>{{item?.price}} kmf</td>
+                                <td *ngIf="item.quantity > 0">
+                                    {{ item?.quantity * item?.price }} kmf
+                                </td>
+                            </tr>
+                            <tr *ngIf="order?.livraison">
+                                <td >Livraison</td>
+                                <td colspan="2">{{order?.livraison?.region}}</td>
+                                <td>{{order?.livraison?.price}} kmf</td>
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="edit == true">
+                            <tr *ngFor="let item of order?.products" >
+                                <td *ngIf="item.quantity > 0 || item.quantity == null">
+                                    {{item.product.name}}
+                                </td>  
+                                <td *ngIf="item.quantity > 0 || item.quantity == null">
+                                    <input [(ngModel)]="item.quantity" (ngModelChange)="calculTotal($event)" type="number" name="" class="form-control">
+                                </td>
+                                
+                                <td *ngIf="item.quantity > 0 || item.quantity == null">{{item.price}} kmf</td>
+                                <td *ngIf="item.quantity > 0 || item.quantity == null">
+                                    {{ item.quantity * item.price }} kmf
+                                </td>
+                                <td *ngIf="item.quantity > 0 || item.quantity == null">
+                                    <button class="btn btn-danger" (click)="removeOrder(item)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr *ngIf="order?.livraison">
+                                <td >Livraison</td>
+                                <td colspan="2">{{order?.livraison?.region}}</td>
+                                <td>{{order?.livraison?.price}} kmf</td>
+                                <td></td>
+                            </tr>
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="3">TOTAL</th>
+                                <th>{{ total + order?.livraison?.price}} kmf</th>
+                                <th *ngIf="edit == true"></th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="row" *ngIf="order?.status == '5'"> 
+                <div class="col-lg-12">
+                    <button *ngIf="edit == false" (click)="editOrder()" class="btn btn-dark">
+                        <i class="fa fa-edit"></i>
+                        MODIFIER
+                    </button>
+                    <button *ngIf="edit == true" (click)="CancelEditOrder()" class="btn btn-danger">
+                        <i class="fa fa-times"></i>
+                        ANNULER
+                    </button>
+                    <button *ngIf="edit == true" (click)="SaveEditOrder()" class="btn btn-success">
+                        <i class="fa fa-save"></i>
+                        ENREGISTRER
+                    </button>
+                    <button *ngIf="edit == false" (click)="validateOrder()" class="btn btn-success pull-right">
+                        <i class="fa fa-check-circle"></i>
+                        VALIDER
+                    </button>
+                    <button *ngIf="edit == false" (click)="deleteOrder()" class="btn btn-danger pull-right">
+                        <i class="fa fa-trash"></i>
+                        SUPPRIMER
+                    </button>
+                </div>
+            </div>
+
+            <!-- <div class="row" *ngIf="order?.status == '1'"> 
+                <div class="col-lg-12">
+                    <button class="btn btn-danger pull-right">
+                        <i class="fa fa-times"></i>
+                        ANNULER LA COMMANDE
+                    </button>
+                </div>
+            </div> -->
+
+            <div class="row" *ngIf="order?.status == '1'"> 
+                <div class="col-lg-12">
+                    <button class="btn btn-danger pull-right">
+                        <i class="fa fa-times"></i>
+                        SUPPRIMER L'HISTORIQUE
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="section" *ngIf="showMap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <agm-map 
+                      [latitude]="endPosition.lat" 
+                      [longitude]="endPosition.lng" 
+                      [zoom]="zoom"
+                      (mapReady)="onMapReady($event)"
+                      [mapTypeControl]='true'
+                    >
+                      <!-- <agm-marker [latitude]="startPosition.lat" [longitude]="startPosition.lng"></agm-marker> -->
+                    </agm-map>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <h2 class="title title-green title-center">
+                DETAILS DU COMMANDE
+            </h2>
+            <div class="row">
+                <table class="table" *ngIf="order?.status != '5'">
+                    <tbody>
+                        <tr>
+                            <th>Commande N°</th>
+                            <td>{{ key }}</td>
+                        </tr>
+                        <tr>
+                            <th class="txt-uppercase">Nom et Prénom</th>
+                            <td>{{order?.customer.name}}</td>
+                        </tr>
+                        <tr>
+                            <th class="txt-uppercase">Ville</th>
+                            <td>{{order?.customer.city}}</td>
+                        </tr>
+                        <tr>
+                            <th class="txt-uppercase">Quartier</th>
+                            <td>{{order?.customer.district}}</td>
+                        </tr>
+                        <tr>
+                            <th class="txt-uppercase">Région</th>
+                            <td>{{order?.customer.region}}</td>
+                        </tr>
+                        <tr>
+                            <th class="txt-uppercase">Tél</th>
+                            <td>{{order?.customer.phone}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table" *ngIf="order?.status == '5'">
+                    <tbody>
+                        <tr>
+                            <th>Commande N°</th>
+                            <td>{{ key }}</td>
+                        </tr>
+                        <tr>
+                            <th class="txt-uppercase">Nom et Prénom*</th>
+                            <td>
+                                <input [(ngModel)]="order?.customer.name" type="text" class="form-control" name="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="txt-uppercase">Ville*</th>
+                            <td>
+                                <input [(ngModel)]="order?.customer.city" type="text" class="form-control" name="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="txt-uppercase">Quartier*</th>
+                            <td>
+                                <input [(ngModel)]="order?.customer.district" type="text" class="form-control" name="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="txt-uppercase">Région*</th>
+                            <td>
+                                <input [(ngModel)]="order?.customer.region" type="text" class="form-control" name="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th class="txt-uppercase">Tél</th>
+                            <td>
+                                <input [(ngModel)]="order?.customer.phone" type="text" class="form-control" name="">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" *ngIf="order?.status == '5'">
+                <div class="col-lg-12">
+                    <button class="btn btn-success pull-right"(click)="saveInfoLivraison()" >
+                        <i class="fa fa-save"></i>
+                        Enregistrer les modifications
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="section">
+        <div class="container">
+            <h2 class="title title-green title-center">
+                INFORMATION DE PAIEMENT
+            </h2>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table" *ngIf="order?.status != '5'">
+                                <tbody>
+                                    <tr>
+                                        <th class="txt-uppercase">
+                                            Nom et Prénom
+                                        </th>
+                                        <td>
+                                            {{order?.payment?.name}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="txt-uppercase">
+                                            Lieux de résidences
+                                        </th>
+                                        <td>
+                                            {{order?.payment?.address}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="txt-uppercase">
+                                            N° Whatsapp
+                                        </th>
+                                        <td>
+                                            {{order?.payment?.whatsapp}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="txt-uppercase">
+                                            Email
+                                        </th>
+                                        <td>
+                                            {{order?.payment?.email}}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="txt-uppercase">
+                                            Mode de paiement
+                                        </th>
+                                        <td *ngIf="order?.payment.payment_mode == '1'">
+                                            Mobile
+                                        </td>
+                                        <td *ngIf="order?.payment.payment_mode == '2'">
+                                            Carte bancaire
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="order?.payment.payment_mode == '1'">
+                                        <th class="txt-uppercase">
+                                            Mobile
+                                        </th>
+                                        <td>
+                                            {{order?.payment?.payment_phone_number}}
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="order?.payment.payment_mode == '2'">
+                                        <th class="txt-uppercase">
+                                            Carte bancaire
+                                        </th>
+                                        <td>
+                                            {{order?.payment?.payment_card_number}}
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                                
+                            </table>
+                            <table class="table" *ngIf="order?.status == '5'">
+                                <tbody>
+                                    <tr>
+                                        <th class="txt-uppercase">
+                                            Nom et Prénom
+                                        </th>
+                                        <td>
+                                            <input [(ngModel)]="order?.payment.name" type="text" class="form-control" name="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="txt-uppercase">
+                                            Lieux de résidences
+                                        </th>
+                                        <td>
+                                            <input [(ngModel)]="order?.payment.address" type="text" class="form-control" name="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="txt-uppercase">
+                                            N° Whatsapp
+                                        </th>
+                                        <td>
+                                            <input [(ngModel)]="order?.payment.whatsapp" type="text" class="form-control" name="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="txt-uppercase">
+                                            Email
+                                        </th>
+                                        <td>
+                                            <input [(ngModel)]="order?.payment.email" type="text" class="form-control" name="">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th class="txt-uppercase">
+                                            Mode de paiement
+                                        </th>
+                                        <td *ngIf="order.payment.payment_mode == '1'">
+                                            Mobile
+                                        </td>
+                                        <td *ngIf="order.payment.payment_mode == '2'">
+                                            Carte bancaire
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="order.payment.payment_mode == '1'">
+                                        <th class="txt-uppercase">
+                                            Mobile
+                                        </th>
+                                        <td>
+                                            <input [(ngModel)]="order?.payment.payment_phone_number" type="text" class="form-control" name="">
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="order?.payment.payment_mode == '2'">
+                                        <th class="txt-uppercase">
+                                            Carte bancaire
+                                        </th>
+                                        <td>
+                                            <input [(ngModel)]="order?.payment.payment_card_number" type="text" class="form-conrol" name="">
+                                        </td>
+                                    </tr>
+                                    
+                                </tbody>
+                                
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="order?.status == '5'">
+                        <div class="col-lg-12">
+                            <button class="btn btn-success pull-right"(click)="saveInfoPaiement()" >
+                                <i class="fa fa-save"></i>
+                                Enregistrer les modifications
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</div>

@@ -1,0 +1,105 @@
+<div class="wrapper">
+    <div class="page-header page-header-xs" data-parallax="true" style="background-color: #ffc902">
+        <div class="filter"></div>
+        <div class="">
+            <div class="motto text-center">
+                <h1>
+                    <img class="logo-head" src="./assets/img/ar2.png">
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="section section-success">
+    	<div class="container">
+            <h2 class="title title-green">Terminé!</h2>
+            <p>Merci pour votre visite, vous trouvez ci joint le fiche de votre commande</p>
+	    	<div class="row" *ngIf="order">
+	    		<div class="col-lg-12">
+	    			<button (click)="generatePdf()" class="btn btn-primary">
+                        <i class="fa fa-print"></i>
+	    				Imprimer le Fiche de commande
+	    			</button>
+	    		</div>
+	    	</div>
+    	</div>
+    </div>
+
+    <div class="section contact-content">
+        <div class="container">
+            <h2 class="title title-green title-center">CONTACTS</h2>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <ngb-tabset [justify]="'center'">
+                                <ngb-tab title="EQUIPE DE GESTION ET COMMERCIAL">
+                                    <ng-template ngbTabContent >
+                                        <div class="row following" id="follows">
+                                            <div class="col-md-6 ml-auto mr-auto">
+                                                <ul class="list-unstyled follows">
+                                                    <li>
+                                                        <div class="row">
+                                                        	<div class="col-md-6">
+                                                        		<i class="fa fa-phone"></i>
+                                                        		Tél
+                                                        	</div>
+                                                        	<div class="col-md-6">002693242817 /3263548</div>
+                                                        </div>
+                                                    </li>
+                                                    <hr />
+                                                    <li>
+                                                        <div class="row">
+                                                        	<div class="col-md-6">
+                                                        		<i class="fa fa-envelope"></i>
+                                                        		Email
+                                                        	</div>
+                                                        	<div class="col-md-6">sawuthikma@gmail.com</div>
+                                                        </div>
+                                                    </li>
+                                                    <hr />
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </ngb-tab>
+                                <ngb-tab title="EQUIPE TECHNIQUE">
+                                    <ng-template ngbTabContent>
+                                        <div class="row following" id="follows">
+                                            <div class="col-md-6 ml-auto mr-auto">
+                                                <ul class="list-unstyled follows">
+                                                    <li>
+                                                        <div class="row">
+                                                        	<div class="col-md-6">
+                                                                <i class="fa fa-phone"></i>
+                                                                Tél
+                                                            </div>
+                                                        	<div class="col-md-6">002693592414</div>
+                                                        </div>
+                                                    </li>
+                                                    <hr />
+                                                    <li>
+                                                        <div class="row">
+                                                        	<div class="col-md-6">
+                                                                <i class="fa fa-envelope"></i>
+                                                                Email
+                                                            </div>
+                                                        	<div class="col-md-6">hikamsocietemultiple@gmail.com</div>
+                                                        </div>
+                                                    </li>
+                                                    <hr />
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </ng-template>
+                                </ngb-tab>
+                            </ngb-tabset>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

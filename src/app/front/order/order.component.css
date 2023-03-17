@@ -1,0 +1,40 @@
+.btn-green {
+    background-color: #ffc902 !important;
+    border-color: #ffc902 !important;
+    color: #FFFFFF;
+    opacity: 1;
+    filter: alpha(opacity=100);
+}
+
+.table thead th {
+    background-color: #ffc902;
+    color: white;
+}
+
+.btn-dark{
+	background: #212121;
+	border-color: #212121;
+}
+
+.title-green{
+    color: #ffc902;
+    font-weight: 500;
+    text-align: center;
+}
+
+.container {
+    box-shadow: 2px 2px 10px;
+    padding: 25px;
+}
+
+.align-center{
+    text-align: center;
+}
+
+.no-shadow {
+    box-shadow: unset !important;
+}
+
+img.logo-head{
+    width: 30%;
+}

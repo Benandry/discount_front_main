@@ -1,0 +1,22 @@
+.list-unstyled{
+	text-align: left;
+}
+.section.order-content{
+    padding-top: 0px;
+}
+
+.title-green{
+    color: #ffc902;
+    font-weight: 500;
+}
+
+.title-center{
+	text-align: center;
+}
+
+img.logo-head{
+    width: 30%;
+}
+div.section.profile-content{
+    padding: 0px 0px 0px;   
+}
