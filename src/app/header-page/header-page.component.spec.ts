@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CgvComponent } from './cgv.component';
+import { HeaderPageComponent } from './header-page.component';
 
-describe('CgvComponent', () => {
-  let component: CgvComponent;
-  let fixture: ComponentFixture<CgvComponent>;
+describe('HeaderPageComponent', () => {
+  let component: HeaderPageComponent;
+  let fixture: ComponentFixture<HeaderPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CgvComponent ]
+      declarations: [ HeaderPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CgvComponent);
+    fixture = TestBed.createComponent(HeaderPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

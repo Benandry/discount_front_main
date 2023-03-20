@@ -7,7 +7,6 @@ import { IndexComponent } from './front/index/index.component';
 import { OrderComponent } from './front/order/order.component';
 import { ContactComponent } from './front/contact/contact.component';
 import { SuccessComponent } from './front/success/success.component';
-import { CgvComponent } from './front/cgv/cgv.component';
 import { SalePointComponent } from './front/sale-point/sale-point.component';
 import { AccountComponent } from './front/account/account.component';
 import { LoginComponent } from './front/login/login.component';
@@ -20,8 +19,6 @@ const routes: Routes =[
     { path: 'order',      component: OrderComponent },
     { path: 'contact',      component: ContactComponent },
     { path: 'success/:key',      component: SuccessComponent },
-    { path: 'cgv',      component: CgvComponent },
-    { path: 'cgv',      component: CgvComponent },
     { path: 'sale-point',      component: SalePointComponent },
     { path: 'account',      component: AccountComponent },
     { path: 'login',      component: LoginComponent },

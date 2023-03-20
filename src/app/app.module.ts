@@ -28,13 +28,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactComponent } from './front/contact/contact.component';
 import { SuccessComponent } from './front/success/success.component';
 import { FilterPipe, SearchPipe } from './pipe/filter.pipe';
-import { CgvComponent } from './front/cgv/cgv.component';
 import { SalePointComponent } from './front/sale-point/sale-point.component';
 import { AccountComponent } from './front/account/account.component';
 import { LoginComponent } from './front/login/login.component';
 import { OrderDetailsComponent } from './front/order-details/order-details.component';
 import { AgmCoreModule } from '@agm/core';
 import { RegisterComponent } from './front/register/register.component';
+import { HeaderPageComponent } from './header-page/header-page.component';
 
 @NgModule({
   declarations: [
@@ -48,12 +48,12 @@ import { RegisterComponent } from './front/register/register.component';
     SuccessComponent,
     FilterPipe,
     SearchPipe,
-    CgvComponent,
     SalePointComponent,
     AccountComponent,
     LoginComponent,
     OrderDetailsComponent,
-    RegisterComponent
+    RegisterComponent,
+    HeaderPageComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +64,6 @@ import { RegisterComponent } from './front/register/register.component';
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFirestoreModule,
-    // StorageServiceModule
     OwlDateTimeModule, 
     OwlNativeDateTimeModule, 
     BrowserAnimationsModule,
