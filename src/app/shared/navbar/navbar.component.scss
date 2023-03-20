@@ -15,9 +15,6 @@ img.top-logo{
     color: #fff !important;
 }
 
-nav ul li .icons{
-    display: none;
-}
 @media screen and (max-width: 500px) {
     .ml-auto, .mx-auto{
         padding: 30px;
@@ -35,7 +32,7 @@ nav ul li .icons{
     }
 
     nav ul li a i{
-        font-size: 30px;
+        font-size: 25px;
     }
     nav ul {
         margin-left: 1rem;

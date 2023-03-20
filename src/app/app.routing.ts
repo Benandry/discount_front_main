@@ -12,6 +12,7 @@ import { SalePointComponent } from './front/sale-point/sale-point.component';
 import { AccountComponent } from './front/account/account.component';
 import { LoginComponent } from './front/login/login.component';
 import { OrderDetailsComponent } from './front/order-details/order-details.component';
+import { RegisterComponent } from './front/register/register.component';
 
 const routes: Routes =[
     { path: '', redirectTo: 'index', pathMatch: 'full' },
@@ -25,6 +26,7 @@ const routes: Routes =[
     { path: 'account',      component: AccountComponent },
     { path: 'login',      component: LoginComponent },
     { path: 'order-details/:key',      component: OrderDetailsComponent },
+    { path: 'register',      component: RegisterComponent },
     
 ];
 

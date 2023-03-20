@@ -36,9 +36,11 @@
 }
 
 img.logo-head{
-    /*width: 30%;*/
+    /* width: 30%; */
     max-width: 200px;
+    /* display: none; */
 }
+
 
 .table{
     text-align: left;

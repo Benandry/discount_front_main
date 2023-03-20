@@ -1,47 +1,3 @@
-<!-- <nav class="navbar navbar-expand-lg fixed-top navbar-transparent" color-on-scroll="500">
-    <div class="container">
-        <div class="logo"> <img class="top-logo" rel="tooltip" title="" data-html="true" data-placement="bottom" src="./assets/img/ar2.png" data-original-title="Hey! <br> Hope you're doing fine :-)"> </div>
-        <div class="navbar-translate">
-            <button class="navbar-toggler navbar-burger" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation" (click)="sidebarToggle()">
-                <span class="navbar-toggler-bar"></span>
-                <span class="navbar-toggler-bar"></span>
-                <span class="navbar-toggler-bar"></span>
-            </button>
-        </div>
-        <div class="navbar-collapse" id="navbarToggler">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a [routerLink]="['/index']" class="nav-link">
-                        BOUTIQUE
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="connected == true">
-                    <a [routerLink]="['/account']" class="nav-link">
-                        MON COMPTE
-                    </a>
-                </li>
-                <li class="nav-item" *ngIf="connected == false">
-                    <a [routerLink]="['/account']" class="nav-link">
-                        SE CONNECTER
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a [routerLink]="['/contact']" class="nav-link" >
-                        CONTACT
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a (click)="myOrder()" class="nav-link nav-cart" >
-                        <i class="fa fa-shopping-cart"></i>
-                        <span class="badge badge-success">{{order.length}}</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav> -->
-
 <nav class="navbar navbar-expand fixed-top navbar-transparent" color-on-scroll="500" >
     <div class="container">
       <div class="logo"> 
@@ -57,17 +13,17 @@
           </li>
           <li class="nav-item" *ngIf="connected == false">
               <a [routerLink]="['/account']" class="nav-link" >
-                <i class="fa fa-lock icons"></i> <span class="menu-nav">SE CONNECTER</span>
+                <i class="fa fa-globe icons"></i> <span class="menu-nav">SE CONNECTER</span>
               </a>
           </li>
           <li class="nav-item" *ngIf="connected == false">
-              <a [routerLink]="['/account']" class="nav-link" >
+              <a [routerLink]="['/register']" class="nav-link" >
                 <i class="fa fa-user-plus icons"></i> <span class="menu-nav">S'INSCRIRE</span>
               </a>
           </li>
           <li class="nav-item">
               <a [routerLink]="['/contact']" class="nav-link" >
-                <i class="fa fa-envelope icons "></i> <span class="menu-nav"> CONTACT</span> 
+                <i class="fa fa-phone icons "></i> <span class="menu-nav"> CONTACT</span> 
               </a>
           </li>
           <li class="nav-item">

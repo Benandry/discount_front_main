@@ -37,4 +37,11 @@
 
 img.logo-head{
     width: 30%;
+    margin: 90px 0px 25px;
+}
+
+@media screen  and (max-width: 524px)  {
+    img.logo-head{
+        margin: 60px 0px 25px;
+    }
 }
