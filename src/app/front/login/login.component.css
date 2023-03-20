@@ -4,7 +4,7 @@
 
 .title-green{
     color: #ffc902;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 .title-center{
@@ -18,4 +18,9 @@
 
 .container-no-shadow {
     box-shadow: unset !important;
+}
+@media screen  and (max-width: 524px){
+    .section{
+        padding: 0px;
+    }
 }

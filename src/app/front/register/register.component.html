@@ -2,7 +2,54 @@
     <app-header-page></app-header-page>
     <div class="section contact-content">
         <div class="container">
-            
+            <div class="section create-account.content">
+                <h2 class="title title-green">S'INSCRIRE</h2>
+                <hr>
+                <div class="row" *ngIf="errorMessage">
+                    <div class="col-lg-12">
+                    <ngb-alert type="danger"  [dismissible]="false">
+                        <div class="container no-shadow">
+                            {{ errorMessage }}
+                            <button type="button" name="button" class="close" (click)="closeAlert(alert)">
+                                <i class="nc-icon nc-simple-remove"></i>
+                            </button>
+                        </div>
+                    </ngb-alert>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="label-control">NOM</label>
+                            <input type="text" class="form-control" name="" [(ngModel)]="register.name" >
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="label-control">EMAIL</label>
+                            <input type="email" class="form-control" name="" [(ngModel)]="register.email">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="label-control">MOT DE PASSE</label>
+                            <input type="password" class="form-control" name="" [(ngModel)]="register.password">
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label class="label-control">CONFIRMER</label>
+                            <input type="password" class="form-control" name="" [(ngModel)]="register.confirm_password">
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-success" (click)="createAccount()">
+                    <i class="fa fa-user-plus"></i>
+                    ENREGISTRER
+                </button>
+            </div>
         </div>
     </div>
 </div>

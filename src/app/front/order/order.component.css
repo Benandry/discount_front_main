@@ -18,7 +18,7 @@
 
 .title-green{
     color: #ffc902;
-    font-weight: 500;
+    font-weight: 400;
     text-align: center;
 }
 
@@ -43,5 +43,8 @@ img.logo-head{
 @media screen  and (max-width: 524px)  {
     img.logo-head{
         margin: 60px 0px 25px;
+    }
+    .section{
+        padding: 0px;
     }
 }

@@ -79,7 +79,7 @@
                   <i class="fa fa-sign-in"></i>
                   SE CONNECTER
                 </button><br><br>
-                <button  class="btn" (click)="next(4)" style="width: 250px;text-align: left;">
+                <button  class="btn" [routerLink]="['/register']" style="width: 250px;text-align: left;">
                   <i class="fa fa-user-plus"></i>
                   S'INSCRIRE
                 </button><br>
@@ -144,61 +144,6 @@
                 </div>
                 <div class="col-lg-2"></div>
             </div>
-        </div>
-    </div>
-
-    <div class="section create-account.content" *ngIf="step == 4">
-        <div class="container">
-            <h2 class="title title-green">S'INSCRIRE</h2>
-            <hr>
-            <div class="row" *ngIf="errorMessage">
-              <div class="col-lg-12">
-                <ngb-alert type="danger"  [dismissible]="false">
-                    <div class="container no-shadow">
-                        {{ errorMessage }}
-                        <button type="button" name="button" class="close" (click)="closeAlert(alert)">
-                            <i class="nc-icon nc-simple-remove"></i>
-                        </button>
-                    </div>
-                </ngb-alert>
-              </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label class="label-control">NOM</label>
-                        <input type="text" class="form-control" name="" [(ngModel)]="register.name" >
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label class="label-control">EMAIL</label>
-                        <input type="email" class="form-control" name="" [(ngModel)]="register.email">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label class="label-control">MOT DE PASSE</label>
-                        <input type="password" class="form-control" name="" [(ngModel)]="register.password">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label class="label-control">CONFIRMER</label>
-                        <input type="password" class="form-control" name="" [(ngModel)]="register.confirm_password">
-                    </div>
-                </div>
-            </div>
-            <button class="btn btn-dark" (click)="next(2)">
-                <i class="fa fa-angle-left"></i>
-                PREC.
-            </button>
-            <button class="btn btn-success pull-right" (click)="createAccount()">
-                <i class="fa fa-user-plus"></i>
-                ENREGISTRER
-            </button>
         </div>
     </div>
 

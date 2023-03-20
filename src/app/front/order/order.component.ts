@@ -28,6 +28,7 @@ export class OrderComponent implements OnInit {
   	phone: '',
     delivry_date: null
   };
+
   location:any;
   step : number = 1;
   payment = {
@@ -39,12 +40,6 @@ export class OrderComponent implements OnInit {
     payment_mode: '1',
     payment_phone_number : '',
     payment_card_number : ''
-  };
-  register = {
-    name: '',
-    email: '',
-    password: '',
-    confirm_password: ''
   };
   errorMessage : string = '';
   userConnected:any;
@@ -309,97 +304,6 @@ export class OrderComponent implements OnInit {
 
   closeAlert(){
     this.errorMessage = '';
-  }
-
-  createAccount(){
-    if (this.register.email && this.register.name && this.register.password && this.register.confirm_password) {
-      if (this.register.password == this.register.confirm_password) {
-        this.verifyUser(this.register.email).then((data:any)=>{
-          if (data && data.length > 0) {
-            this.errorMessage= "L'adresse e-mail est déjà utilisée par un autre compte"
-          } else {
-            let user = {
-              name: this.register.name,
-              email: this.register.email,
-              type: 2
-            }
-            let saved = this.firebasePrvd.save('user',user);
-            if (saved) {
-                this.createCredential({
-                  email: this.register.email,
-                  password: this.register.password
-                })
-            }
-          }
-        })
-      } else {
-        this.errorMessage = 'Mot de passe non confirmé!';
-      }
-
-    } else {
-      this.errorMessage = 'Tous les champs sont obligatoir!';
-    }
-
-  }
-
-  verifyUser(email){
-    var ref = this.firebase.database.ref('user').orderByChild('email').equalTo(email);
-    return new Promise((resolve)=>{
-      ref.on('value', function(snapshot) {
-        var res = [];
-        snapshot.forEach(function(data) {
-          res.push(data.val());
-        });
-        resolve(res);
-      });
-    });
-  }
-
-  createCredential(value){
-    this.tryRegister(value)
-  }
-
-  doRegister(value){
-     return new Promise<any>((resolve, reject) => {
-       firebase.auth().createUserWithEmailAndPassword(value.email, value.password)
-       .then(res => {
-         resolve(res);
-       }, err => reject(err))
-     })
-  }
-
-  tryRegister(value){
-    this.doRegister(value)
-    .then(res => {
-      this.checkUserRole(res.user.email).then((data)=>{
-        this.userConnected = data[0];
-        console.log(this.userConnected)
-        this.errorMessage = "";
-        this.register = {
-          name: '',
-          email: '',
-          password: '',
-          confirm_password: ''
-        };
-
-        this.step = 3;
-      })
-    }, err => {
-      console.log(err);
-
-      switch (err.code) {
-        case "auth/invalid-email":
-          this.errorMessage= "Adresse Email invalide"
-          break;
-        case "auth/weak-password":
-          this.errorMessage= "Le mot de passe doit contenir au moins 6 caractères"
-          break;
-        case "auth/email-already-in-use":
-          this.errorMessage= "L'adresse e-mail est déjà utilisée par un autre compte"
-          break;
-      }
-
-    })
   }
 
   checkUserRole(email){

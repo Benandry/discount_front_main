@@ -15,6 +15,11 @@ img.top-logo{
     color: #fff !important;
 }
 
+nav ul li a:hover{
+    color: #BBBBBB;
+    text-decoration: underline;
+}
+
 @media screen and (max-width: 500px) {
     .ml-auto, .mx-auto{
         padding: 30px;
@@ -34,12 +39,18 @@ img.top-logo{
     nav ul li a i{
         font-size: 25px;
     }
+   
     nav ul {
         margin-left: 1rem;
     }
     nav ul li .icons{
         display: block;
     }
+
+    nav ul li .icons:hover{
+        text-decoration: underline;
+    }
+
     nav ul li .menu-nav{
         display: none;
     }
