@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="card page-carousel card-slide">
-                              <ngb-carousel [interval]="3000">
+                              <ngb-carousel [interval]="3000" >
                                   <ng-template ngbSlide *ngFor="let product of products">
                                         <div class="picsum-img-wrapper">
                                             <img [src]="product?.img?.url + product?.img?.name" alt="Random slide">
